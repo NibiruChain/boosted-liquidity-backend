@@ -1,4 +1,4 @@
-# Project README
+# Backend for boosted liquidity project
 
 ## Overview
 
@@ -242,7 +242,3 @@ yourproject/
 ## License
 
 This project is licensed under the **MIT License**.
-
----
-
-Thank you for using our backend system! If you have any questions or need further assistance, please feel free to reach out.
