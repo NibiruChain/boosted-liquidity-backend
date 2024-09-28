@@ -1,0 +1,8 @@
+project_id             = "nibiru-chain-dev"
+region                 = "us-central1"
+db_instance_name       = "my-db-instance"
+db_username            = "postgres"
+db_password            = "your-db-password"
+db_name                = "appdb"
+cloud_run_service_name = "backend-service"
+database_url           = "postgresql://postgres:your-db-password@/appdb?host=/cloudsql/your-project-id:region:my-db-instance"
