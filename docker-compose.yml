@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  web:
+    image: myapp_image:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: web
+    command: python api/app.py
+    ports:
+      - "5001:5001"
+    environment:
+      FLASK_ENV: development
+      DATABASE_URL: postgresql://user:password@db:5432/yourdb
+      AUTH_TOKEN: mysecrettoken
+      PYTHONPATH: /app
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:13
+    container_name: db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: yourdb
+    ports:
+      - "5435:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  transaction_monitor:
+    image: myapp_image:latest
+    container_name: transaction_monitor
+    command: bash run_transaction_monitor.sh
+    depends_on:
+      - db
+    environment:
+      FLASK_ENV: development
+      DATABASE_URL: postgresql://user:password@db:5432/yourdb
+      PYTHONPATH: /app
+    volumes:
+      - .:/app
+
+volumes:
+  pgdata:
